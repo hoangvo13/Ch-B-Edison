@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<title>Personal Health Monitoring System</title>
+<link rel="stylesheet" type="text/css" href="forestvillefunding_styles.css">
+<meta charset="utf-8">
+</head>
+
+<body>
+<h1>Personal Health Monitoring System</h1><hr>
+<h2>Heart Beat Information</h2>
+<script type="text/javascript">
+	document.write("<ul>");
+	document.write("<li>Patient name: Coc Map</li>");
+	document.write("<li>Heart Beat: dying</li>");
+	document.write("</ul>");
+</script>
+<h2>Blood Pressure Information</h2>
+<script type="text/javascript">
+	document.write("<ul>");
+	document.write("<li>Patient name: Coc Map</li>");
+	document.write("<li>Blood Pressure: dying</li>");
+	document.write("</ul>");
+</script>
+<hr>
+</body>
+
+</html>
