@@ -6,7 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var compression = require('compression');
 
-var routes = require('./routes/index');
+var patientRoutes = require('./routes/patient');
+var patientHealthRoutes = require('./routes/patient-health');
 
 var app = express();
 app.use(compression());
@@ -17,10 +18,11 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'SPA')));
-app.use(express.static(path.join(__dirname, 'node_modules')));
+app.use(express.static(path.join(__dirname, '../SPA')));
+app.use(express.static(path.join(__dirname, '../SPA/node_modules')));
 
-app.use('/api', routes);
+app.use('/api/patients', patientRoutes);
+app.use('/api/patient-health', patientHealthRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

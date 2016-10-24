@@ -1,0 +1,1 @@
+var app = angular.module('Main', ['ui.router', 'patient', 'patient-health']);

@@ -1,0 +1,47 @@
+<div id="patient-data" class="container">	
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+			aria-controls="navbar">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+		<h3>{{ phct.records[0].patient.patientName }}</h3>
+	</div>		
+	<div id="navbar" class="navbar-collapse collapse">
+		<form class="navbar-form navbar-right">
+			<div class="form-group">
+				<input type="text" placeholder="By status" class="form-control" ng-model="search.status">
+			</div>
+			<div class="form-group">
+				<select class="form-control" ng-model="recordSortBy">
+                    <option value="">-- Order By --</option>
+                    <option value="heartRate">Heart Rate (Ascending)</option>
+					<option value="-heartRate">Heart Rate (Descending)</option>                    
+                    <option value="bloodPressure">Blood Pressure (Ascending)</option>
+					<option value="-bloodPressure">Blood Pressure (Descending)</option>
+					<option value="mearsureDate">Date (Ascending)</option>
+					<option value="-mearsureDate">Date (Descending)</option>
+                </select>
+			</div>
+		</form>
+	</div>
+
+	<table class="table table-striped table-bordered">
+		<tr>            
+			<th>Date</th>
+			<th>Heart Rate</th>
+			<th>Blood Pressure</th>
+			<th>Status</th>			
+		</tr>
+		<tr ng-repeat="record in phct.records | filter:search:strict | orderBy:recordSortBy">
+			<td>{{ record.mearsureDate }}</td>
+			<td>{{ record.heartRate }}</td>
+			<td>{{ record.bloodPressure }}</td>
+			<td ng-if="record.status == 'Healthy'" style="color: green; font-weight: bold;">{{ record.status | uppercase }}</td>
+			<td ng-if="record.status == 'In Danger'" style="color: #f7f300; font-weight: bold;">{{ record.status | uppercase}}</td>
+			<td ng-if="record.status == 'Emergency'" style="color: red; font-weight: bold;">{{ record.status | uppercase}}</td>			
+		</tr>
+	</table>
+</div>

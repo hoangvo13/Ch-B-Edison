@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="Main">
+
+<head>
+	<title>Personal Health Monitoring system</title>
+	<!--Include libraries-->
+	<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+	<!--Include libraries-->
+
+	<link rel="stylesheet" href="assets/main.css">
+</head>
+
+<body>    
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+				<a class="navbar-brand" href="#">Personal health monitoring</a>
+			</div>			
+		</div>
+	</nav>
+
+    <div ui-view></div>	
+</body>
+
+<!--Include libraries-->
+<script src="jquery/dist/jquery.min.js"></script>
+<script src="angular/angular.min.js"></script>
+<script src="angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="bootstrap/dist/js/bootstrap.min.js"></script>
+<!--Include libraries-->
+
+<script src="app/app.module.js"></script>
+<script src="app/app.route.js"></script>
+
+<script src="app/patient/module.js"></script>
+<script src="app/patient/service.js"></script>
+<script src="app/patient/component.js"></script>
+<script src="app/patient/controller.js"></script>
+
+<script src="app/patient-health/module.js"></script>
+<script src="app/patient-health/service.js"></script>
+<script src="app/patient-health/component.js"></script>
+<script src="app/patient-health/controller.js"></script>
+</html>

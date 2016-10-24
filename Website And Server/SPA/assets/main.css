@@ -1,0 +1,22 @@
+.navbar-inverse {
+    background-color: #00A1DE;
+    border-color: #00A1DE;
+}
+
+.navbar-inverse .navbar-brand {
+    color: white;
+}
+
+#patient-data {
+    margin-top: 70px;
+}
+
+.form-control {
+    display: inline;
+    width: 20%;
+    border-radius: 0;    
+}
+
+.btn {
+    border-radius: 0;
+}
