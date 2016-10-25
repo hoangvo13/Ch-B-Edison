@@ -5,7 +5,7 @@ patient.controller('PatientController', ['$scope', 'PatientService', function ($
         ct.patients = result.data;
     });
 
-    ct.getAllPatients = function () {
+    ct.refreshPatientList = function () {
         PatientService.getAllPatients().then(function (result) {
             ct.patients = result.data;
         });
