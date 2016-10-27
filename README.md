@@ -2,13 +2,27 @@
 
 ## Run the server and the website (Development environment)
 
--   Ensure NodeJS is installed on your OS
+-   Ensure [NodeJS](https://nodejs.org/en/) is installed on your OS
 -   Open Command Prompt/Terminal and go to **Website And Server/SPA** folder
--   Type **npm install**
+-   Type
+
+```
+npm install
+```
+
 -   Go to **Website And Server/REST** folder
--   Type **npm install**
--   Type **npm start** to run the server and the website
+-   Type
 
-## Run the server and the website (Production server)
+```
+npm install
+```
 
--   To be updated
+-   Run the server
+
+```
+npm start
+```
+
+## Run the server and the website (Raspberry Pi)
+
+-   To be updated soon
