@@ -4,6 +4,12 @@
 
 -   Ensure [NodeJS](https://nodejs.org/en/) is installed on your OS
 -   Open Command Prompt/Terminal and go to **Website And Server/SPA** folder
+-   Install nodemon to auto-refresh server upon changes
+
+```
+npm i nodemon -g
+```
+
 -   Type
 
 ```
