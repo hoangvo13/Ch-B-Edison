@@ -4,14 +4,14 @@
 <head>
 	<title>Personal Health Monitoring system</title>
 	<!--Include libraries-->
-	<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 	<!--Include libraries-->
 
 	<link rel="stylesheet" href="assets/main.css">
 </head>
 
-<body>    
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
@@ -22,18 +22,19 @@
                     <span class="icon-bar"></span>
                 </button>
 				<a class="navbar-brand" href="#">Personal health monitoring</a>
-			</div>			
+			</div>
 		</div>
 	</nav>
 
-    <div ui-view></div>	
+	<div ui-view></div>
 </body>
 
 <!--Include libraries-->
-<script src="jquery/dist/jquery.min.js"></script>
-<script src="angular/angular.min.js"></script>
-<script src="angular-ui-router/release/angular-ui-router.min.js"></script>
-<script src="bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="node_modules/angular/angular.min.js"></script>
+<script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="node_modules/socket.io-client/socket.io.js"></script>
 <!--Include libraries-->
 
 <script src="app/app.module.js"></script>
@@ -48,4 +49,7 @@
 <script src="app/patient-health/service.js"></script>
 <script src="app/patient-health/component.js"></script>
 <script src="app/patient-health/controller.js"></script>
+
+<script src="scripts/notification.js"></script>
+
 </html>

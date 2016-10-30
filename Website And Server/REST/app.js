@@ -10,16 +10,29 @@ var patientRoutes = require('./routes/patient');
 var patientHealthRoutes = require('./routes/patient-health');
 
 var app = express();
-app.use(compression());
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
+// Setup notification
+var alert;
+io.on('connection', function (socket) {
+	alert = socket;
+});
 
 // uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, 'SPA', 'favicon.ico')));
+app.use(compression());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../SPA')));
-app.use(express.static(path.join(__dirname, '../SPA/node_modules')));
+
+// Send alert to client.
+app.post('/api/alert', function (req, res) {
+	alert.emit('notify', { id: req.body.id, user: req.body.name, status: req.body.status });
+	res.status(200).json({ result: 'success' });
+});
 
 app.use('/api/patients', patientRoutes);
 app.use('/api/patient-health', patientHealthRoutes);
@@ -30,8 +43,6 @@ app.use(function (req, res, next) {
 	err.status = 404;
 	next(err);
 });
-
-// error handlers
 
 // development error handler
 // will print stacktrace
@@ -56,6 +67,6 @@ app.use(function (err, req, res, next) {
 });
 
 
-app.listen(3000, '0.0.0.0', function() {
-    console.log('Listening on port 3000');
+http.listen(3000, '0.0.0.0', function () {
+	console.log('Listening on port 3000');
 });
