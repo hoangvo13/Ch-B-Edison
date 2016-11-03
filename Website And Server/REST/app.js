@@ -27,6 +27,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../SPA')));
+app.disable('x-powered-by');
 
 // Send alert to client.
 app.post('/api/alert', function (req, res) {
