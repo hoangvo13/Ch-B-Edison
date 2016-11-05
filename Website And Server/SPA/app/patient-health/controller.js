@@ -1,11 +1,11 @@
 patient.controller('PatientHealthController', ['$scope', '$stateParams', 'PatientHealthService', function ($scope, $stateParams, PatientHealthService) {
     var ct = this;
 
-    ct.userId = 0;
+    ct.userId;
 
     PatientHealthService.getAllPatientHealthRecord($stateParams.id).then(function (result) {
         ct.records = result.data;    
-        ct.userId = result.data[0].id;    
+        ct.userId = result.data[0].patientId;    
     });
 
     ct.refreshRecords = function(id) {
