@@ -1,23 +1,18 @@
-import time, sys, signal, atexit
+import time, sys, signal, atexit, requests
 
 import pyupm_groveehr as upmGroveehr
 
- 
+alertAPI = 'http://192.168.1.3:3000/api/alert'
 
 # Instantiate a Grove Ear-clip Heart Rate sensor on digital pin D2
 
 myHeartRateSensor = upmGroveehr.GroveEHR(0)
-
- 
-
- 
 
 ## Exit handlers ##
 
 # This stops python from printing a stacktrace when you hit control-C
 
 def SIGINTHandler(signum, frame):
-
     raise SystemExit
 
  
@@ -34,7 +29,17 @@ def exitHandler():
 
     sys.exit(0)
 
- 
+# Make API call to generate alert
+def generateAlert(fr):
+    status = 'Emergency'
+    if fr >= 80 and fr <= 100:
+        status = 'Healthy'
+    elif fr <= 60 or fr >=120:
+        status = 'In Danger'
+    
+    if status == 'Emergency' or status == 'In Danger':
+        alert = requests.post(alertAPI, data = {'name': 'Coc Map', 'status': status, 'rate': fr})
+    
 
 # Register exit handlers
 
@@ -73,10 +78,10 @@ while(1):
 
     # output milliseconds passed, beat count, and computed heart rate
 
-    outputStr = "Millis: {0} Beats: {1} Heart Rate: {2}".format(
+    outputStr = "Millis: {0} Beats: {1} Heart Rate: {2}".format(millis, beats, fr)
 
-    millis, beats, fr)
+    generateAlert(fr)
 
     print outputStr
 
-    time.sleep(1)
+    time.sleep(3)

@@ -31,7 +31,7 @@ app.disable('x-powered-by');
 
 // Send alert to client.
 app.post('/api/alert', function (req, res) {
-	alert.emit('notify', { id: req.body.id, user: req.body.name, status: req.body.status });
+	alert.emit('notify', { user: req.body.name, status: req.body.status, rate: req.body.rate });
 	res.status(200).json({ result: 'success' });
 });
 

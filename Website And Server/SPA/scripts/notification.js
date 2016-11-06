@@ -1,11 +1,11 @@
 var socket = io();
 
 socket.on('notify', function (msg) {
-    notify(msg.user, msg.status);
+    notify(msg.user, msg.status, msg.rate);
 });
 
 // Generate notification.
-function notify(user, status) {
+function notify(user, status, rate) {
     // Let's check if the browser supports notifications
     if (!("Notification" in window)) {
         alert("This browser does not support desktop notification");
@@ -14,10 +14,10 @@ function notify(user, status) {
     else if (Notification.permission === "granted") {
         // If it's okay let's create a notification
         var options = {
-            body: status,
+            body: status.toUpperCase(),
             dir: "ltr"
         };
-        var notification = new Notification(user + "'s health status: ", options);
+        var notification = new Notification(user + "'s health beat: " + rate, options);
     }
     // Otherwise, we need to ask the user for permission
     // Note, Chrome does not implement the permission static property
@@ -31,10 +31,10 @@ function notify(user, status) {
             // If the user is okay, let's create a notification
             if (permission === "granted") {
                 var options = {
-                    body: status,
+                    body: status.toUpperCase(),
                     dir: "ltr"
                 };
-                var notification = new Notification(user + "'s health status: ", options);
+                var notification = new Notification(user + "'s health beat: " + rate, options);
             }
         });
     }
