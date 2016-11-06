@@ -18,6 +18,7 @@ function notify(user, status, rate) {
             dir: "ltr"
         };
         var notification = new Notification(user + "'s health beat: " + rate, options);
+        setTimeout(notification.close.bind(notification), 10000);
     }
     // Otherwise, we need to ask the user for permission
     // Note, Chrome does not implement the permission static property
@@ -35,6 +36,7 @@ function notify(user, status, rate) {
                     dir: "ltr"
                 };
                 var notification = new Notification(user + "'s health beat: " + rate, options);
+                setTimeout(notification.close.bind(notification), 10000);
             }
         });
     }

@@ -33,6 +33,9 @@ def exitHandler():
 
     sys.exit(0)
 
+def sendRecord(data):
+    record = requests.post(sendRecordAPI, data)
+
 # Make API call to generate alert
 def generateAlert(fr):
     status = 'Emergency'
@@ -41,6 +44,8 @@ def generateAlert(fr):
     elif fr <= 60 or fr >=120:
         status = 'In Danger'
     
+    sendRecord(data)
+
     if status == 'Emergency' or status == 'In Danger':
         data = {
             'rate': fr,
@@ -50,12 +55,7 @@ def generateAlert(fr):
             'name': username             
         }
 
-        alert = requests.post(alertAPI, data)
-        sendRecord(data)
-
-
-def sendRecord(data):
-    record = requests.post(sendRecordAPI, data) 
+        alert = requests.post(alertAPI, data)         
     
 
 # Register exit handlers
