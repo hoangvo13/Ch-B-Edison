@@ -44,17 +44,16 @@ def generateAlert(fr):
     elif fr <= 60 or fr >=120:
         status = 'In Danger'
     
+    data = {
+        'rate': fr,
+        'status': status,                     
+        'userId': userId,
+        'name': username             
+    }
+
     sendRecord(data)
 
     if status == 'Emergency' or status == 'In Danger':
-        data = {
-            'rate': fr,
-            'status': status,             
-            'measureDate': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            'userId': userId,
-            'name': username             
-        }
-
         alert = requests.post(alertAPI, data)         
     
 

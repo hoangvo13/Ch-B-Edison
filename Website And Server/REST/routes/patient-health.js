@@ -19,12 +19,14 @@ router.get('/patient/:id', function (req, res, next) {
 });
 
 router.post('/patient', function (req, res, next) {
-    PatientHealth.create({
+    var data = {
         heartRate: req.body.rate,
         status: req.body.status,
-        mearsureDate: req.body.measureDate,
+        mearsureDate: Date.now(),
         patientId: req.body.userId,
-    }).then(function (result) {
+    };
+    
+    PatientHealth.create(data).then(function (result) {
         res.status(200).json(result);
     });
 });
