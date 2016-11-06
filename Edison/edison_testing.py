@@ -38,11 +38,11 @@ def sendRecord(data):
 
 # Make API call to generate alert
 def generateAlert(fr):
-    status = 'Emergency'
+    status = 'In Danger'
     if fr >= 80 and fr <= 100:
         status = 'Healthy'
     elif fr <= 60 or fr >=120:
-        status = 'In Danger'
+        status = 'Emergency'
     
     data = {
         'rate': fr,
