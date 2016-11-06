@@ -1,8 +1,12 @@
-import time, sys, signal, atexit, requests
-
+import time, sys, signal, atexit, requests, datetime
 import pyupm_groveehr as upmGroveehr
 
-alertAPI = 'http://192.168.1.3:3000/api/alert'
+ip = 'http://192.168.1.3:3000'
+alertAPI = ip + '/api/alert'
+sendRecordAPI = ip + '/api/patient-health/patient'
+
+userId = '6c84fb90-12c4-11e1-840d-7b25c5ee775a'
+username = 'Dien Bui'
 
 # Instantiate a Grove Ear-clip Heart Rate sensor on digital pin D2
 
@@ -38,7 +42,20 @@ def generateAlert(fr):
         status = 'In Danger'
     
     if status == 'Emergency' or status == 'In Danger':
-        alert = requests.post(alertAPI, data = {'name': 'Coc Map', 'status': status, 'rate': fr})
+        data = {
+            'rate': fr,
+            'status': status,             
+            'measureDate': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            'userId': userId,
+            'name': username             
+        }
+
+        alert = requests.post(alertAPI, data)
+        sendRecord(data)
+
+
+def sendRecord(data):
+    record = requests.post(sendRecordAPI, data) 
     
 
 # Register exit handlers
