@@ -41,7 +41,7 @@ def generateAlert(fr):
     status = 'In Danger'
     if fr >= 80 and fr <= 100:
         status = 'Healthy'
-    elif fr <= 60 or fr >=120:
+    elif fr < 60 or fr > 120:
         status = 'Emergency'
     
     data = {
