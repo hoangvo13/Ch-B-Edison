@@ -3,7 +3,7 @@ import pyupm_groveehr as upmGroveehr
 
 ip = 'http://192.168.1.3:3000'
 alertAPI = ip + '/api/alert'
-sendRecordAPI = ip + '/api/patient-health/patient'
+sendRecordAPI = ip + '/api/patient-health'
 
 userId = '6c84fb90-12c4-11e1-840d-7b25c5ee775a'
 username = 'Dien Bui'
@@ -19,7 +19,7 @@ myHeartRateSensor = upmGroveehr.GroveEHR(0)
 def SIGINTHandler(signum, frame):
     raise SystemExit
 
- 
+
 
 # This lets you run code on exit,
 
@@ -43,19 +43,19 @@ def generateAlert(fr):
         status = 'Healthy'
     elif fr < 60 or fr > 120:
         status = 'Emergency'
-    
+
     data = {
         'rate': fr,
-        'status': status,                     
+        'status': status,
         'userId': userId,
-        'name': username             
+        'name': username
     }
 
     sendRecord(data)
 
     if status == 'Emergency' or status == 'In Danger':
-        alert = requests.post(alertAPI, data)         
-    
+        alert = requests.post(alertAPI, data)
+
 
 # Register exit handlers
 
@@ -72,7 +72,7 @@ myHeartRateSensor.initClock()
 
 myHeartRateSensor.startBeatCounter()
 
- 
+
 
 while(1):
 
@@ -84,7 +84,7 @@ while(1):
 
     beats = myHeartRateSensor.beatCounter()
 
- 
+
 
     # heartRate() requires that at least 5 seconds pass before
 

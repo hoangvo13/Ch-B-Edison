@@ -18,7 +18,7 @@ router.get('/patient/:id', function (req, res, next) {
     });
 });
 
-router.post('/patient', function (req, res, next) {
+router.post('/', function (req, res, next) {
     var data = {
         heartRate: req.body.rate,
         status: req.body.status,
