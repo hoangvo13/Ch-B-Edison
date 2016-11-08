@@ -11,12 +11,14 @@
     margin-top: 70px;
 }
 
-.form-control {
-    display: inline;
-    width: 20%;
+.form-control {    
     border-radius: 0;    
 }
 
 .btn {
+    border-radius: 0;
+}
+
+.modal-content {
     border-radius: 0;
 }

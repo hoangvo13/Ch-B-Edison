@@ -1,36 +1,71 @@
 <div id="patient-data" class="container">
 	<div id="navbar" class="navbar-collapse collapse">
 		<form class="navbar-form navbar-right">
-			<div class="form-group">
-				<input type="text" placeholder="By name" class="form-control" ng-model="search.patientName">
-			</div>
-			<div class="form-group">
-				<select class="form-control" ng-model="sortBy">
-                    <option value="">-- Order By --</option>
-                    <option value="patientName">Patient Name (Ascending)</option>
-					<option value="-patientName">Patient Name (Descending)</option>                    
-                    <option value="joinDate">Join Date (Ascending)</option>
-					<option value="-joinDate">Join Date (Descending)</option>
-                </select>
-			</div>
-			<div class="form-group">
-				<button class="btn btn-info" ng-click="pct.refreshPatientList()">
-					<span class="glyphicon glyphicon-refresh"></span> Refresh List
-				</button>
-			</div>
+			<input type="text" placeholder="By name" class="form-control" ng-model="search.patientName">
+			<select class="form-control" ng-model="sortBy">
+				<option value="">-- Order By --</option>
+				<option value="patientName">Patient Name (Ascending)</option>
+				<option value="-patientName">Patient Name (Descending)</option>                    
+				<option value="joinDate">Join Date (Ascending)</option>
+				<option value="-joinDate">Join Date (Descending)</option>
+			</select>
+			<button class="btn btn-info" ng-click="pct.refreshPatientList()">
+				<span class="glyphicon glyphicon-refresh"></span>
+			</button>
+			<button class="btn btn-success" data-toggle="modal" data-target="#newPatient">
+				<span class="glyphicon glyphicon-plus"></span>
+			</button>
 		</form>
 	</div>
 
 	<table class="table table-striped table-bordered">
-		<tr>            
+		<tr>
 			<th>ID</th>
 			<th>Patient Name</th>
-            <th>Join Date</th>
+			<th>Join Date</th>
 		</tr>
 		<tr ng-repeat="patient in pct.patients | filter:search:strict | orderBy:sortBy">
-			<td class="col-md-4">{{ patient.id }}</td>            
+			<td class="col-md-4">{{ patient.id }}</td>
 			<td><a ng-href="{{ '#/patient/' + patient.id }}">{{ patient.patientName }}</a></td>
-            <td>{{ patient.joinDate | date: 'yyyy-MM-dd' }}</td>			
+			<td>{{ patient.joinDate | date: 'yyyy-MM-dd' }}</td>
 		</tr>
 	</table>
+</div>
+
+<!--Pop-up to add new patient-->
+<div id="newPatient" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Add new patient</h4>
+			</div>
+			<form name="addPatientForm" id="new-patient-form" ng-submit="pct.addNewPatient(addPatientForm.$valid)" focus-invalid novalidate>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="name">Patient Name <em class="text-danger">*</em></label>
+						<input type="text" class="form-control" name="name" id="name" ng-model="patient.name" maxlength="50" required autofocus>
+
+						<div ng-messages="submitted && addPatientForm.name.$error" class="text-danger" role="alert">
+							<p ng-message="required">This is a required field.</p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="name">Join Date <em class="text-danger">*</em></label>
+						<input readonly style="cursor: pointer" type="text" id="jdate" name="jdate" class="form-control"
+							ng-click="pct.openDatePicker()" uib-datepicker-popup="dd-MM-yyyy" ng-model="patient.jdate" is-open="pct.jDatepicker" datepicker-options="bdateOptions"
+							close-text="Close" placeholder="Click to open datepicker" required/>
+
+						<div ng-messages="submitted && addPatientForm.jdate.$error" class="text-danger" role="alert">
+							<p ng-message="required">This is a required field.</p>
+						</div>						
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-success">Add</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>

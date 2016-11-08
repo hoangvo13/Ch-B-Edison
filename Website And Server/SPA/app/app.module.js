@@ -1,1 +1,1 @@
-var app = angular.module('Main', ['ui.router', 'patient', 'patient-health']);
+var app = angular.module('Main', ['ui.router', 'ngMessages', 'ui.bootstrap', 'patient', 'patient-health']);
