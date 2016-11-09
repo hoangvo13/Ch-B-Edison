@@ -40,7 +40,7 @@
 			<th>Status</th>			
 		</tr>
 		<tr ng-repeat="record in phct.records | filter:search:strict | orderBy:recordSortBy">
-			<td class="col-md-4">{{ record.mearsureDate }}</td>
+			<td class="col-md-4">{{ record.mearsureDate | date:'dd-MM-yyyy HH:mm:ss' }}</td>
 			<td>{{ record.heartRate }}</td>			
 			<td ng-if="record.status == 'Healthy'" style="color: green; font-weight: bold;">{{ record.status | uppercase }}</td>
 			<td ng-if="record.status == 'In Danger'" style="color: #f7f300; font-weight: bold;">{{ record.status | uppercase}}</td>

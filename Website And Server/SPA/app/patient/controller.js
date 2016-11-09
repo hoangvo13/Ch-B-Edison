@@ -2,15 +2,11 @@ patient.controller('PatientController', ['$scope', 'PatientService', function ($
     var ct = this;
     ct.jDatepicker = false;
 
-    PatientService.getAllPatients().then(function (result) {
-        ct.patients = result.data;
-    });
-
     ct.refreshPatientList = function () {
         PatientService.getAllPatients().then(function (result) {
             ct.patients = result.data;
         });
-    };
+    };        
 
     ct.openDatePicker = function() {
         ct.jDatepicker = true;
@@ -30,12 +26,15 @@ patient.controller('PatientController', ['$scope', 'PatientService', function ($
         PatientService.addNewPatient(data).then(function (result) {
             $("#newPatient").modal('hide');
 
+            // Reset form
             $scope.addPatientForm.$setPristine();
             $scope.patient.name = '';
             $scope.patient.jdate = '';            
 
-            // Refresh list
-            ct.refreshPatientList();
+            // Add new item to list
+            ct.patients.push(result.data);
         });
     };
+
+    ct.refreshPatientList();
 }]);
